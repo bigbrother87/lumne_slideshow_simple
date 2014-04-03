@@ -35,7 +35,8 @@ function uploader(id, count){
 		var url = '';
 		url = attachment['url'];
 		//jQuery('#new_image_path'+id).val(url);
-		jQuery('#new_image'+id).before(newImage(id, url));
+		jQuery('.image-button').parent().parent().before(newImage(id, url));
+		activateDeletes();
 	});
 
 	//Open the uploader dialog
@@ -43,8 +44,9 @@ function uploader(id, count){
 }
 
 function newImage(section, url){
-	var number = jQuery('#new_image'+section).data('count');
-	jQuery('#new_image'+section).data('count', number*1+1);
+	var number = jQuery('.image-button').data('count');
+	jQuery('.image-button').data('count', ++number);
+	var image = jQuery('.lumne-image-table').data('deleteImage');
 
 	return '<tr class=\'lumne-image-row\'>'
 			+ '<td>'
@@ -54,27 +56,14 @@ function newImage(section, url){
 			+ '<td>'
 				+ '<input id=\'plugin_text_image_' + section + '_' + number + '\' class=\'lumne-image-link\' name=\'plugin_options[link_' + section + '_' + number + ']\' size=\'30\' type=\'text\' placeholder=\'Insert link here (e.g. http://lumne.net)\' />'
 			+ '</td>'
-			+ '<td><img src=\'\' id=\'delete_' + section + '_' + number + '\' class=\'delete-image\' /></td>'
+			+ '<td><img src=\'' + image + '\' id=\'delete_' + section + '_' + number + '\' class=\'delete-image\' /></td>'
 		+ '</tr>';
-
-	/*return '<label for=\'plugin_text_image_'+ section +'_' + number + '\'>'
-			+ '<img src=\'' + url + '\' class=\'lumne-image-preview\' />'
-			+ '<input type=\'hidden\' name=\'plugin_options[path_' + section + '_' + number + ']\' value=\'' + url + '\' />'
-			+ '<input id=\'plugin_text_image_' + section + '_' + number + '\' class=\'lumne-image-link\' name=\'plugin_options[link_' 
-			+ section + '_' + number + ']\' size=\'30\' type=\'text\' placeholder=\'Insert link here (e.g. http://lumne.net)\' />'
-			+ '</label><br />';*/
 }
 
 function activateDeletes(){
 	jQuery('.delete-image').click(function(){
 		var id = jQuery(this).attr('id').substring(7);
-		//alert(id);
-		//jQuery('label[for="plugin_text_image_0_0"]').remove();
-		jQuery('label[for="'+ 'plugin_text_image_' + id +'"]').remove();
-		jQuery(this).remove();
+		jQuery(this).parent().parent().remove();
+		jQuery('.image-button').data('count', jQuery('.lumne-image-row').length);
 	});
-}
-
-function reNumber(id){
-	return true;
 }

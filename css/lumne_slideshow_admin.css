@@ -1,13 +1,9 @@
-.lumne-image-link{
-
-}
-
 .lumne-image{
 	display:inline-block;
 }
 
-.lumne-image-row{
-	display:block;
+.lumne-image-table{
+	display:table-cell;
 }
 
 .lumne-image-row > td{
@@ -28,4 +24,11 @@
 .delete-image{
 	width:2em;
 	cursor:pointer;
+}
+
+@media only screen and (max-width: 782px) {
+	.lumne-image-row > td {
+		width:auto;
+		display:table-cell;
+	}
 }
