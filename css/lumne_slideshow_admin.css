@@ -1,0 +1,31 @@
+.lumne-image-link{
+
+}
+
+.lumne-image{
+	display:inline-block;
+}
+
+.lumne-image-row{
+	display:block;
+}
+
+.lumne-image-row > td{
+	width:1%;
+	white-space:nowrap;
+}
+
+.lumne-image-preview{
+	max-width: 150px;
+	max-height: 50px;
+	margin: 3px;
+}
+
+.mid-align{
+	vertical-align:middle;
+}
+
+.delete-image{
+	width:2em;
+	cursor:pointer;
+}
