@@ -48,5 +48,6 @@ function resize(){
 }
 
 function setTopShowHeight(){
-	return jQuery('.lumne_image').height();
+	return jQuery('.lumne_image').height() / jQuery('.lumne_image').width() * jQuery('.top-show').width();
+	//return jQuery('.lumne_image').height();
 }

@@ -23,9 +23,12 @@
 	width:100%;
 	height:auto;
 	display:block;
-	/*height:auto;*/
-	/*background-color:#000;*/
-	margin:0;
+	font-size:0;
+}
+
+.lumne-slideshow .lumne_image > img{
+	height:auto;
+	width:100%;
 }
 
 .ui-effects-wrapper{

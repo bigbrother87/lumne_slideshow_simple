@@ -184,9 +184,11 @@
 
 		foreach($images as $image){
 			$c = substr(strrchr($image, '_'),1);
-			$top .= (isset($options["link_{$id}_{$c}"]) && filter_var($options["link_{$id}_{$c}"], FILTER_VALIDATE_URL) ? '<a href="'.$options["link_{$id}_{$c}"].'">' : '');
-				$top .= "<img class='lumne_image' id='image{$id}_".$c."'src='".$options["path_{$id}_{$c}"]."' />";
+			//$top .= "<div class='lumne_image' id='image{$id}_".$c."'>";
+			$top .= (isset($options["link_{$id}_{$c}"]) && filter_var($options["link_{$id}_{$c}"], FILTER_VALIDATE_URL) ? '<a href="'.$options["link_{$id}_{$c}"].'" class="lumne_image" id="image'.$id.'_'.$c.'">' : '');
+				$top .= "<img ".(isset($options["link_{$id}_{$c}"]) && filter_var($options["link_{$id}_{$c}"], FILTER_VALIDATE_URL) ? '' : 'class="lumne_image" id="image'.$id.'_'.$c.'" ')."src='".$options["path_{$id}_{$c}"]."' />";
 			$top .= (isset($options["link_{$id}_{$c}"]) && filter_var($options["link_{$id}_{$c}"], FILTER_VALIDATE_URL) ? '</a>' : '');
+			//$top .= "</div>";
 		}
 
 		$output = '<div class="lumne-slideshow'.($active?' active':'').'" id="gallery'.$id
