@@ -3,7 +3,7 @@
 	 * Plugin Name: Lumne Slideshow
 	 * Plugin URI: http://lumne.net/plugins/slideshow/updates
 	 * Description: Slideshow designed and developed by Lumne.
-	 * Version: 0.1
+	 * Version: 0.3
 	 * Author: Chad Milburn
 	 * Author URI: http://lumne.net
 	 * License: GPL2
@@ -80,8 +80,6 @@
 	
 	// Displays description text for admin page section
 	function plugin_section_text(){
-		//$id = substr($section['id'], strpos($section['id'], 'plugin_gallery_')+15);
-		//echo '<p>Settings for gallery.</p>';
 	}
 
 	// Displays Slide Pause Speed input
@@ -130,16 +128,12 @@
 	function plugin_options_validate($input){
 		// Renumber images starting with zero
 		 $images = preg_grep("/path_\d*_\d*/", array_keys($input));
-		 //print_r($images);
-		 //echo nl2br(print_r($input, true));
 		 ksort($images);
 		 $temp_array = array();
 		 $c = 0;
 		 $id = array();
 		 foreach($images as $image){
 		 	preg_match("/path_(\d*)_(\d*)/", $image, $id);
-		 	//echo nl2br(print_r($id, true));
-		 	//else echo 'No match found. Check regex.';
 		 	$temp_array['path_'.$id[1].'_'.$c.''] = $input['path_'.$id[1].'_'.$id[2].''];
 		 	$temp_array['link_'.$id[1].'_'.$c.''] = $input['link_'.$id[1].'_'.$id[2].''];
 		 	unset($input['path_'.$id[1].'_'.$id[2].'']);
@@ -171,10 +165,6 @@
 								'active' => 0
 								), $atts ) );
 
-		//$files = array_diff(scandir(getcwd().$options["path_{$id}"]),
-		//						array('.','..'));
-
-
 		$active = (in_array('active', $atts));
 
 		$top = '';
@@ -184,11 +174,9 @@
 
 		foreach($images as $image){
 			$c = substr(strrchr($image, '_'),1);
-			//$top .= "<div class='lumne_image' id='image{$id}_".$c."'>";
 			$top .= (isset($options["link_{$id}_{$c}"]) && filter_var($options["link_{$id}_{$c}"], FILTER_VALIDATE_URL) ? '<a href="'.$options["link_{$id}_{$c}"].'" class="lumne_image" id="image'.$id.'_'.$c.'">' : '');
 				$top .= "<img ".(isset($options["link_{$id}_{$c}"]) && filter_var($options["link_{$id}_{$c}"], FILTER_VALIDATE_URL) ? '' : 'class="lumne_image" id="image'.$id.'_'.$c.'" ')."src='".$options["path_{$id}_{$c}"]."' />";
 			$top .= (isset($options["link_{$id}_{$c}"]) && filter_var($options["link_{$id}_{$c}"], FILTER_VALIDATE_URL) ? '</a>' : '');
-			//$top .= "</div>";
 		}
 
 		$output = '<div class="lumne-slideshow'.($active?' active':'').'" id="gallery'.$id
