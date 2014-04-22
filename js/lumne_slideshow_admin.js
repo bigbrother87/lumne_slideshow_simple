@@ -64,6 +64,6 @@ function activateDeletes(){
 	jQuery('.delete-image').click(function(){
 		var id = jQuery(this).attr('id').substring(7);
 		jQuery(this).parent().parent().remove();
-		jQuery('.image-button').data('count', jQuery('.lumne-image-row').length);
+		//jQuery('.image-button').data('count', jQuery('.lumne-image-row').length);
 	});
 }
